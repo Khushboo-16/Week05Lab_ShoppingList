@@ -50,15 +50,23 @@ public class ShoppingListServlet extends HttpServlet {
         //processRequest(request, response);
         HttpSession session = request.getSession();
         
-        String user = (String)session.getAttribute("username");
         
-        if(user != null && !user.equals("")) {
-            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        
+        if(action != null && action.equals("logout")) {
+            session.invalidate();
+            response.sendRedirect("ShoppingList");
         }
         else {
-            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-        }
-        
+            String user = (String)session.getAttribute("username");
+            
+            if(user != null && !user.equals("")) {
+                 getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+            }
+            else {
+                 getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            }
+        }   
     }
 
     /**

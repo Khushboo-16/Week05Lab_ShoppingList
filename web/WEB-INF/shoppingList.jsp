@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>Shopping List</h1>
-        Hello, ${username} <a href="/ShoppingList/ShoppingList?action=logout">Logout</a>
+        Hello, ${username} <a href="?action=logout">Logout</a>
         <h2>List</h2>
         <form method="POST">
             <input type="hidden" name="action" value="add" />
