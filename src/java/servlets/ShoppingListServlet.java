@@ -92,13 +92,32 @@ public class ShoppingListServlet extends HttpServlet {
            }
            else if (action.equals("add")) {
                String tfItem = request.getParameter("tfItem");
+               
                if(tfItem != null && !tfItem.equals("")) {
                    ArrayList<String> items = (ArrayList<String>)session.getAttribute("items");
-                   if(items == null)
+                  
+                   if(items == null) {
                        items = new ArrayList<String>();
+                   }
                    items.add(tfItem);
                    session.setAttribute("items", items);
                }
+           }
+           else if (action.equals("delete")) {
+               String select = request.getParameter("select");
+               
+               if(select != null && !select.equals("")) {
+                   
+                   int selected = Integer.parseInt(select);
+                   ArrayList<String> items = (ArrayList<String>)session.getAttribute("items");
+                   
+                   if(items == null) {
+                       items = new ArrayList<String>();
+                   }
+                   items.remove(selected);
+                   session.setAttribute("items", items);
+               }
+               
            }
        }
        response.sendRedirect("ShoppingList");
